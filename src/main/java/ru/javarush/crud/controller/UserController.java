@@ -18,10 +18,15 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/list")
-    public String listUsers(Model model) {
+    public String listUsers(Model model, @RequestParam(value = "str", required = false, defaultValue = "") String str) {
 
         // Get users from the dao
-        List<User> usersList = userService.getUsers();
+        List<User> usersList;
+        if (str.equals("") || (str == null)) {
+            usersList = userService.getUsers();
+        } else {
+            usersList = userService.getUsers(str);
+        }
 
         // Add users to the model
         model.addAttribute("users", usersList);

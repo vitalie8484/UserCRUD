@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>List of Users</title>
@@ -19,6 +20,18 @@
 
     <div id = "container">
         <div id = "content">
+
+            <!-- Put new search function -->
+            <form action="${pageContext.request.contextPath}/user/list">
+                <table>
+                    <tr>
+                        <td>
+                            Filter by name : <input type="text" name="str">
+                            <input type="submit" value="Search" class="save">
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
             <!-- Put new button: Add User -->
             <input type="button" value="Add User"
@@ -62,6 +75,14 @@
                     </tr>
                 </c:forEach>
             </table>
+
+            </br>
+
+            <!-- Put new button: Add User -->
+            <input type="button" value="Add User"
+                   onclick="window.location.href='showFormAdd'; return false"
+                   class="add-button"
+            />
 
         </div>
     </div>

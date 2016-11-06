@@ -31,6 +31,22 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    public List<User> getUsers(String str) {
+
+        // Get the current hibernate session
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        // Create a query sorted by name
+        Query<User> query = currentSession.createQuery("from User where name like CONCAT('%',:str,'%') order by name", User.class);
+        query.setParameter("str", str);
+
+        // Execute query and get result list
+        List<User> users = query.getResultList();
+
+        // Return the results
+        return users;
+    }
+
     public void saveUser(User user) {
 
         // Get current hibernate session
